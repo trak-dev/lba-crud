@@ -6,8 +6,7 @@ const useStyles = makeStyles((theme) =>
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      backgroundColor: "black",
-      color: "white",
+      background: "#3f51b5",
     },
   })
 );

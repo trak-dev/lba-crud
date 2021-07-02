@@ -12,10 +12,7 @@ export default function Navbar() {
       <AppBar position="static" className={classes.root}>
         <Toolbar>
           <Typography className={classes.title} variant="h2" noWrap>
-            {/* l'url est un boutton qui renvois   l'accueil oui c'est nul ... */}
-            <Typography
-              className={classes.link}
-            >
+            <Typography className={classes.link}>
               GESTION DE MES INGRÉDIENTS
             </Typography>
           </Typography>
