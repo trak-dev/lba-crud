@@ -19,9 +19,18 @@ export const newIngredient = (formData) => async (dispatch) => {
 };
 export const deleteItem = (id) => async (dispatch) => {
   try {
-    await await api.deleteThis(id);
+    const { data } = await api.deleteThis(id);
 
-    dispatch({ type: "DELETE", payload: id });
+    dispatch({ type: "DELETE", payload: data });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const changeQuantity = (id, operation) => async (dispatch) => {
+  try {
+    const { data } = await api.changeThis(id, operation);
+    dispatch({ type: "CHANGE", payload: data });
   } catch (error) {
     console.log(error);
   }

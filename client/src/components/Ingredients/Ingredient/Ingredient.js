@@ -6,36 +6,47 @@ import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import EditIcon from "@material-ui/icons/Edit";
 import useStyles from "./styles";
 import { useDispatch } from "react-redux";
-import { deleteItem } from "../../../actions";
+import { deleteItem, changeQuantity } from "../../../actions";
+import moment from "moment";
 
-export default function Ingredient({ value, quantity, date, id }) {
+export default function Ingredient(item) {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const data = item.item;
+  moment().locale("fr");
 
   return (
     <Paper elevation={3} className={classes.root}>
       <div className={classes.left}>
-        <Typography variant="h5">{value} : </Typography>
-        <Typography variant="h5"> {quantity}</Typography>
+        <Typography variant="h5">{data.name} : </Typography>
+        <Typography variant="h5">&nbsp;{data.quantity}</Typography>
       </div>
       <div className={classes.spacers}>
         <Typography variant="h5">
           {" "}
-          dernier ingrédient ajouté il y as {date} .
+          dernier ingrédient ajouté {moment(data.lastAdded).fromNow()}
         </Typography>
       </div>
       <div className={classes.right}>
         {" "}
-        <IconButton>
-          <AddIcon fontSize="large" color="primary" />
-        </IconButton>
-        <IconButton>
+        <IconButton
+          onClick={() =>
+            dispatch(changeQuantity(data._id, { operation: "minus" }, data))
+          }
+        >
           <RemoveIcon fontSize="large" color="primary" />
+        </IconButton>
+        <IconButton
+          onClick={() =>
+            dispatch(changeQuantity(data._id, { operation: "more" }, data))
+          }
+        >
+          <AddIcon fontSize="large" color="primary" />
         </IconButton>
         <IconButton>
           <EditIcon fontSize="large" color="primary" />
         </IconButton>
-        <IconButton onClick={() => dispatch(deleteItem(id))}>
+        <IconButton onClick={() => dispatch(deleteItem(data._id))}>
           <DeleteForeverIcon fontSize="large" color="secondary" />
         </IconButton>
       </div>
