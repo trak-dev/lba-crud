@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { TextField, Box, Button, InputAdornment } from "@material-ui/core";
 import FastfoodIcon from "@material-ui/icons/Fastfood";
+import { useDispatch } from "react-redux";
 import BarChartIcon from "@material-ui/icons/BarChart";
+import { newIngredient } from "../actions";
 import useStyles from "./styles";
 
 export default function AddForm() {
+  const dispatch = useDispatch();
   const initialState = {
     name: "",
     number: "",
@@ -17,7 +20,12 @@ export default function AddForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(newIngredient({ ...formData }));
+    clear();
     console.log(formData);
+  };
+  const clear = () => {
+    setFormData({ name: "", number: "" });
   };
   return (
     <div className={classes.root}>
@@ -69,6 +77,15 @@ export default function AddForm() {
             className={classes.space}
           >
             Ajouter
+          </Button>
+          <Button
+            variant="contained"
+            color="secondary"
+            size="large"
+            className={classes.space}
+            onClick={clear}
+          >
+            Effacer
           </Button>
         </form>
       </Box>

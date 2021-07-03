@@ -4,16 +4,16 @@ import Inventory from "../models/inventory.js";
 
 export const getList = async (req, res) => {
   try {
-    const list = await Inventory.find()
+    const list = await Inventory.find();
     res.json(list);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
 };
 export const getIngredient = async (req, res) => {
-    const  {id}  = req.params;
+  const { id } = req.params;
   try {
-    const list = await Inventory.findById(id)
+    const list = await Inventory.findById(id);
     res.json(list);
   } catch (error) {
     res.status(404).json({ message: error.message });
@@ -22,13 +22,14 @@ export const getIngredient = async (req, res) => {
 
 export const createIngredient = async (req, res) => {
   const newItem = new Inventory({
-    name: "peches",
-    quantity: 666,
+    name: "test",
+    quantity: 5,
     lastAdded: new Date().toISOString(),
   });
-try {
+  try {
     await newItem.save();
     res.status(201).json(newItem);
   } catch (error) {
     res.status(409).json({ message: error.message });
-  }}
+  }
+};

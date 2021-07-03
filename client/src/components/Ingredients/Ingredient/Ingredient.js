@@ -6,7 +6,7 @@ import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import EditIcon from "@material-ui/icons/Edit";
 import useStyles from "./styles";
 
-export default function Ingredient({ value, quantity }) {
+export default function Ingredient({ value, quantity, date }) {
   const classes = useStyles();
 
   return (
@@ -16,7 +16,10 @@ export default function Ingredient({ value, quantity }) {
         <Typography variant="h5"> {quantity}</Typography>
       </div>
       <div className={classes.spacers}>
-        <Typography variant="h5"> dernier ingrédient ajouté le : </Typography>
+        <Typography variant="h5">
+          {" "}
+          dernier ingrédient ajouté il y as {date} .
+        </Typography>
       </div>
       <div className={classes.right}>
         {" "}
