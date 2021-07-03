@@ -3,7 +3,7 @@ import { TextField, Box, Button, InputAdornment } from "@material-ui/core";
 import FastfoodIcon from "@material-ui/icons/Fastfood";
 import { useDispatch } from "react-redux";
 import BarChartIcon from "@material-ui/icons/BarChart";
-import { newIngredient } from "../actions";
+import { newIngredient } from "../../actions/index";
 import useStyles from "./styles";
 
 export default function AddForm() {
@@ -20,9 +20,8 @@ export default function AddForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(newIngredient({ ...formData }));
+    dispatch(newIngredient(formData));
     clear();
-    console.log(formData);
   };
   const clear = () => {
     setFormData({ name: "", number: "" });

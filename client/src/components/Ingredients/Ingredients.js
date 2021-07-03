@@ -9,19 +9,17 @@ import { CircularProgress } from "@material-ui/core";
 
 export default function Ingredients() {
   const classes = useStyles();
-  const data = useSelector((state) => state.data);
+  const data = useSelector((state) => Object.values(state.data));
   const dispatch = useDispatch();
   moment().locale("he");
   useEffect(() => {
     dispatch(getAll());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  if (data !== undefined && data.length >= 1) {
+  if (data !== undefined && data.length > 0) {
     return (
       <div className={classes.root}>
-        <h2>Ingredients (liste)</h2>
         {data.map((data) => {
-          console.log(data);
           return (
             <Ingredient
               key={data._id}

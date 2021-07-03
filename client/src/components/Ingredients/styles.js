@@ -5,6 +5,6 @@ export default makeStyles((theme) => ({
     width: "80%",
     display: "flex",
     alignItems: "center",
-    flexDirection: "column  ",
+    flexDirection: "column-reverse  ",
   },
 }));

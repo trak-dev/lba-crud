@@ -21,15 +21,16 @@ export const getIngredient = async (req, res) => {
 };
 
 export const createIngredient = async (req, res) => {
-  const newItem = new Inventory({
-    name: "test",
-    quantity: 5,
-    lastAdded: new Date().toISOString(),
-  });
+  const Item = req.body;
   try {
+    const newItem = new Inventory({
+      name: Item.name,
+      quantity: Item.number,
+      lastAdded: new Date().toISOString(),
+    });
     await newItem.save();
     res.status(201).json(newItem);
-  } catch (error) {
+  } catch {
     res.status(409).json({ message: error.message });
   }
 };

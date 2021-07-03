@@ -9,4 +9,12 @@ export const getAll = () => async (dispatch) => {
     console.log(error);
   }
 };
+export const newIngredient = (formData) => async (dispatch) => {
+  try {
+    const { data } = await api.addNewIng(formData);
+    dispatch({ type: "NEW", payload: data });
+  } catch (error) {
+    console.log(error);
+  }
+};
 export default getAll;
