@@ -5,9 +5,12 @@ import RemoveIcon from "@material-ui/icons/Remove";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import EditIcon from "@material-ui/icons/Edit";
 import useStyles from "./styles";
+import { useDispatch } from "react-redux";
+import { deleteItem } from "../../../actions";
 
-export default function Ingredient({ value, quantity, date }) {
+export default function Ingredient({ value, quantity, date, id }) {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   return (
     <Paper elevation={3} className={classes.root}>
@@ -32,7 +35,7 @@ export default function Ingredient({ value, quantity, date }) {
         <IconButton>
           <EditIcon fontSize="large" color="primary" />
         </IconButton>
-        <IconButton>
+        <IconButton onClick={() => dispatch(deleteItem(id))}>
           <DeleteForeverIcon fontSize="large" color="secondary" />
         </IconButton>
       </div>

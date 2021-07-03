@@ -17,4 +17,12 @@ export const newIngredient = (formData) => async (dispatch) => {
     console.log(error);
   }
 };
-export default getAll;
+export const deleteItem = (id) => async (dispatch) => {
+  try {
+    await await api.deleteThis(id);
+
+    dispatch({ type: "DELETE", payload: id });
+  } catch (error) {
+    console.log(error);
+  }
+};

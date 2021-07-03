@@ -23,6 +23,7 @@ export default function Ingredients() {
           return (
             <Ingredient
               key={data._id}
+              id={data._id}
               value={data.name}
               quantity={data.quantity}
               date={moment(data.lastAdded).fromNow()}

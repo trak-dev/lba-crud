@@ -34,3 +34,12 @@ export const createIngredient = async (req, res) => {
     res.status(409).json({ message: error.message });
   }
 };
+export const deleteItem = async (req, res) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id))
+    return res.status(404).send(`No post with id: ${id}`);
+
+  await Inventory.findByIdAndRemove(id);
+
+  res.json({ message: "Post deleted successfully." });
+};
