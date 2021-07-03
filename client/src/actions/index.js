@@ -35,3 +35,14 @@ export const changeQuantity = (id, operation) => async (dispatch) => {
     console.log(error);
   }
 };
+export const searchItem = (search) => async (dispatch) => {
+  try {
+    if (search === "") {
+      search = "*";
+    }
+    const { data } = await api.searchItem(search);
+    dispatch({ type: "FETCH_ALL", payload: data });
+  } catch (error) {
+    console.log(error);
+  }
+};

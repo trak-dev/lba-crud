@@ -58,3 +58,21 @@ export const changeQuantity = async (req, res) => {
   const list = await Inventory.find();
   res.json(list);
 };
+
+export const getSearch = async (req, res) => {
+  const { search } = req.params;
+  try {
+    if (search == "*") {
+      const list = await Inventory.find();
+      res.json(list);
+    } else {
+      const name = new RegExp(search, "i");
+      const list = await Inventory.find({
+        $or: [{ name }],
+      });
+      res.json(list);
+    }
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};

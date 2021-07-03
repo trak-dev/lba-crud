@@ -31,14 +31,14 @@ export default function Ingredient(item) {
         {" "}
         <IconButton
           onClick={() =>
-            dispatch(changeQuantity(data._id, { operation: "minus" }, data))
+            dispatch(changeQuantity(data._id, { operation: "minus" }))
           }
         >
           <RemoveIcon fontSize="large" color="primary" />
         </IconButton>
         <IconButton
           onClick={() =>
-            dispatch(changeQuantity(data._id, { operation: "more" }, data))
+            dispatch(changeQuantity(data._id, { operation: "more" }))
           }
         >
           <AddIcon fontSize="large" color="primary" />
