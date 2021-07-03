@@ -8,13 +8,11 @@ import useStyles from "./styles";
 import { useDispatch } from "react-redux";
 import { deleteItem, changeQuantity } from "../../../actions";
 import moment from "moment";
-import { useHistory } from "react-router-dom";
 
 export default function Ingredient(item) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const data = item.item;
-  const history = useHistory();
   moment().locale("fr");
 
   return (

@@ -41,7 +41,8 @@ export const createIngredient = async (req, res) => {
         lastAdded: new Date().toISOString(),
       });
       await newItem.save();
-      res.status(201).json(newItem);
+      const list = await Inventory.find();
+      res.status(201).json(list);
     } catch {
       res.status(409).json({ message: error.message });
     }
@@ -68,7 +69,7 @@ export const changeQuantity = async (req, res) => {
   } else if (operation == "minus") {
     await Inventory.findByIdAndUpdate(id, { $inc: { quantity: -1 } });
     const zero = await Inventory.findById(id);
-    if (zero.quantity === 0) {
+    if (zero.quantity <= 0) {
       await Inventory.findByIdAndRemove(id);
     }
   }
