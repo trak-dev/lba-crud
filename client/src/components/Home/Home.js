@@ -12,6 +12,7 @@ export default function Home() {
       <AddForm />
       <SearchBar />
       <h1>Liste des ingrédients</h1>
+      {}
       <Ingredients />
     </div>
   );
