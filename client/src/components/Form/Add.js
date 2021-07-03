@@ -8,9 +8,12 @@ import useStyles from "./styles";
 
 export default function AddForm() {
   const dispatch = useDispatch();
+  const editData = JSON.parse(localStorage.getItem("edit"));
   const initialState = {
-    name: "",
-    number: "",
+    name: editData ? editData?.name : "",
+    number: editData ? editData?.quantity : "",
+    editing: false,
+    id: editData ? editData?._id : "",
   };
   const [formData, setFormData] = useState(initialState);
   const classes = useStyles();
@@ -20,12 +23,19 @@ export default function AddForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (editData) {
+      formData.editing = true;
+    } else {
+      formData.editing = false;
+    }
     dispatch(newIngredient(formData));
     clear();
   };
   const clear = () => {
     setFormData({ name: "", number: "" });
+    localStorage.clear();
   };
+
   return (
     <div className={classes.root}>
       <h1>Ajouter un ingrédient</h1>

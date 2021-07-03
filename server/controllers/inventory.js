@@ -22,16 +22,29 @@ export const getIngredient = async (req, res) => {
 
 export const createIngredient = async (req, res) => {
   const Item = req.body;
-  try {
-    const newItem = new Inventory({
-      name: Item.name,
-      quantity: Item.number,
-      lastAdded: new Date().toISOString(),
-    });
-    await newItem.save();
-    res.status(201).json(newItem);
-  } catch {
-    res.status(409).json({ message: error.message });
+  if (Item.editing === true) {
+    try {
+      await Inventory.findByIdAndUpdate(Item.id, {
+        name: Item.name,
+        quantity: Item.number,
+      });
+      const list = await Inventory.find();
+      res.status(201).json(list);
+    } catch {
+      res.status(409).json({ message: error.message });
+    }
+  } else {
+    try {
+      const newItem = new Inventory({
+        name: Item.name,
+        quantity: Item.number,
+        lastAdded: new Date().toISOString(),
+      });
+      await newItem.save();
+      res.status(201).json(newItem);
+    } catch {
+      res.status(409).json({ message: error.message });
+    }
   }
 };
 
@@ -54,6 +67,10 @@ export const changeQuantity = async (req, res) => {
     await Inventory.findByIdAndUpdate(id, { $inc: { quantity: 1 } });
   } else if (operation == "minus") {
     await Inventory.findByIdAndUpdate(id, { $inc: { quantity: -1 } });
+    const zero = await Inventory.findById(id);
+    if (zero.quantity === 0) {
+      await Inventory.findByIdAndRemove(id);
+    }
   }
   const list = await Inventory.find();
   res.json(list);

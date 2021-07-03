@@ -3,8 +3,7 @@ const reducer = (state = [], action) => {
     case "FETCH_ALL":
       return { ...action.payload };
     case "NEW":
-      const size = Object.keys(state).length + 1;
-      return { ...state, [size]: { ...action.payload } };
+      return { ...action.payload };
     case "CHANGE":
       return { ...action.payload };
     case "DELETE":

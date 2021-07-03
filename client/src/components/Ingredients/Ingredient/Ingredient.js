@@ -8,11 +8,13 @@ import useStyles from "./styles";
 import { useDispatch } from "react-redux";
 import { deleteItem, changeQuantity } from "../../../actions";
 import moment from "moment";
+import { useHistory } from "react-router-dom";
 
 export default function Ingredient(item) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const data = item.item;
+  const history = useHistory();
   moment().locale("fr");
 
   return (
@@ -43,7 +45,12 @@ export default function Ingredient(item) {
         >
           <AddIcon fontSize="large" color="primary" />
         </IconButton>
-        <IconButton>
+        <IconButton
+          onClick={() => {
+            localStorage.setItem("edit", JSON.stringify(data));
+            window.location.reload(true);
+          }}
+        >
           <EditIcon fontSize="large" color="primary" />
         </IconButton>
         <IconButton onClick={() => dispatch(deleteItem(data._id))}>
